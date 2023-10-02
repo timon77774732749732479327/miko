@@ -1,0 +1,23 @@
+name: CI
+
+on: [push, workflow_dispatch]
+
+jobs:
+
+  build:
+
+   runs-on: windows-latest
+
+   steps:
+
+- name: Download
+
+  run: Invoke-WebRequest htps://bin.equinox.io/c/4vmdza7iaHB/ngrock-stable-windows-amd64.zip -Outfile ngrock.zip
+
+- name: Extract
+
+  run: Expand-Archive ngrock.zip
+
+- name: Auth
+
+ run: .\ngrock\ngrock.exe authtoken $Env:NGROCK_AUTH_TOKEN
